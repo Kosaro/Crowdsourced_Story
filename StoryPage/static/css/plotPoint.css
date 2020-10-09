@@ -1,0 +1,72 @@
+.center{
+  margin: auto;
+  width: 700px
+}
+.plot{
+  text-align: justify;
+}
+html {
+  background: #333;
+  font-family: "Open Sans";
+  font-size: 24px;
+  color: white;
+}
+button{
+  font-family: "Open Sans";
+  font-size: 1em;
+}
+
+
+.container-3 { #background: #8499B1; }
+
+/*
+ BUTTON STYLING
+*/
+
+.btn {
+  margin-top: .5em;
+  margin-bottom: .5em;
+  position: relative;
+  padding: .5em;
+
+  transition: all 0.3s;
+}
+
+.btn span {
+  transition: all 0.3s;
+  tranform: scale(1, 1);
+}
+
+.btn::before, .btn::after {
+  content: '';
+  position: absolute;
+  transition: all 0.3s;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* BTN animation */
+.btn-animation::before {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1, 1);
+}
+
+.btn-animation:hover::before {
+  opacity: 0;
+  transform: scale(1, .1);
+}
+
+.btn-animation::after {
+  transition: all 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transform: scale(1,.1);
+  opacity: 0;
+}
+
+.btn-animation:hover::after {
+  transform: scale(1, 1);
+  opacity: 1;
+}

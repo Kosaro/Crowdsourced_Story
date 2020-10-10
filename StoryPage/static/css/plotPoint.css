@@ -29,11 +29,9 @@ button{
   position: relative;
   padding: .5em;
 
-  transition: all 0.3s;
 }
 
 .btn span {
-  transition: all 0.3s;
   tranform: scale(1, 1);
 }
 
@@ -56,13 +54,12 @@ button{
 
 .btn-animation:hover::before {
   opacity: 0;
-  transform: scale(1, .1);
+  transform: scale(1, .01);
 }
 
 .btn-animation::after {
-  transition: all 0.3s;
   border: 1px solid rgba(255, 255, 255, 0.5);
-  transform: scale(1,.1);
+  transform: scale(1,.01);
   opacity: 0;
 }
 

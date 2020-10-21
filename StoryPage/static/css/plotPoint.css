@@ -17,7 +17,6 @@ button{
 }
 
 
-.container-3 { #background: #8499B1; }
 
 /*
  BUTTON STYLING
@@ -77,3 +76,54 @@ button{
   transform: scale(1, 1);
   opacity: 1;
 }
+
+
+.content-grid{
+    display: grid;
+    grid-column-gap: 1rem;
+    grid-template-areas:
+      "vote plot"
+      ". choices"; }
+
+.votes{
+  display: flex;
+  flex-direction: column;
+}
+
+.votes_wrapper{
+  grid-area: vote;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.plot-point{
+  grid-area: plot;
+}
+.choices{
+  grid-area: choices;
+}
+
+.vote_icon_up, .vote_icon_down{
+  width: 2rem;
+  filter: invert(94%) sepia(100%) saturate(0%) hue-rotate(228deg) brightness(107%) contrast(106%) opacity(15%);
+}
+
+.vote_icon_up:hover{
+    filter: opacity(30%) invert(51%) sepia(98%) saturate(2265%) hue-rotate(83deg) brightness(123%) contrast(120%);
+}
+
+.vote_icon_up.pressed{
+  filter: invert(51%) sepia(98%) saturate(2265%) hue-rotate(83deg) brightness(123%) contrast(120%);
+}
+
+.vote_icon_down:hover{
+  filter: opacity(30%) invert(30%) sepia(69%) saturate(2328%) hue-rotate(359deg) brightness(101%) contrast(106%);
+}
+
+.vote_icon_down{
+  transform: scaleY(-1);
+}
+.vote_icon_down.pressed{
+  filter: opacity(100%) invert(30%) sepia(69%) saturate(2328%) hue-rotate(359deg) brightness(101%) contrast(106%);
+}
+

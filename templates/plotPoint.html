@@ -1,6 +1,22 @@
 {% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type='text/javascript'>
+    $(document).ready(function() {
+        $(".vote_icon_down").click(function () {
+            $(this).toggleClass("pressed");
+            $(".vote_icon_up").removeClass("pressed");
+        });
+        $(".vote_icon_up").click(function () {
+            $(this).toggleClass("pressed");
+            $(".vote_icon_down").removeClass("pressed");
+        });
+
+
+});
+</script>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
@@ -9,16 +25,21 @@
     </style>
 </head>
 <body>
-<div class="center">
-    <p class="plot">{{plot_point}}</p>
-<div>
+<div class="center content-grid">
+
+    <p class="plot plot-point">{{plot_point}}</p>
+<div class="votes_wrapper">
+    <div class="votes">
+        <img class="vote_icon_up" src="{% static 'icons/triangle.svg' %}" />
+        <img class="vote_icon_down " src="{% static 'icons/triangle.svg' %}" />
+    </div>
+</div>
+<div class="choices">
     {% for choice in choices %}
         <div class="btn btn-animation">
             <span >{{ choice }}</span>
         </div>
     {% endfor %}
-  <div class="container-3">
-</div>
   </div>
 </div>
 </div>

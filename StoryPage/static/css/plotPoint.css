@@ -17,7 +17,6 @@ button{
 }
 
 
-
 /*
  BUTTON STYLING
 */
@@ -77,8 +76,20 @@ button{
   opacity: 1;
 }
 
+.header{
+  position: fixed;
+  height: 1.5rem;
+  top: 0;
+  left: 50%;
+  background: #333;
+  margin-left: -350px;
+  display: flex;
+  z-index: 5;
+  border-bottom: ridge rgba(255,255,255,.3) 1px ;
+}
 
 .content-grid{
+    margin-top: 1rem;
     display: grid;
     grid-column-gap: 1rem;
     grid-template-areas:
@@ -88,14 +99,26 @@ button{
 .votes{
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .votes_wrapper{
   grid-area: vote;
   display: flex;
-  flex-direction: row;
   align-items: center;
+  flex-direction: row;
 }
+
+
+.back{
+  width: 1.50rem;
+  filter: invert(94%) sepia(100%) saturate(0%) hue-rotate(228deg) brightness(107%) contrast(106%) opacity(15%);
+}
+.back:hover{
+  filter: invert(30%) sepia(69%) saturate(2328%) hue-rotate(359deg) brightness(101%) contrast(106%);
+
+}
+
 .plot-point{
   grid-area: plot;
 }
@@ -117,7 +140,7 @@ button{
 }
 
 .vote_icon_down:hover{
-  filter: opacity(30%) invert(30%) sepia(69%) saturate(2328%) hue-rotate(359deg) brightness(101%) contrast(106%);
+  filter: opacity(40%) invert(30%) sepia(69%) saturate(2328%) hue-rotate(359deg) brightness(101%) contrast(106%);
 }
 
 .vote_icon_down{
@@ -127,3 +150,11 @@ button{
   filter: opacity(100%) invert(30%) sepia(69%) saturate(2328%) hue-rotate(359deg) brightness(101%) contrast(106%);
 }
 
+.add_choice{
+  filter: opacity(30%) invert(51%) sepia(98%) saturate(2265%) hue-rotate(83deg) brightness(123%) contrast(120%);
+  width: 1.25rem;
+  margin-left: 0rem;
+}
+.add_choice:hover{
+  filter: invert(51%) sepia(98%) saturate(2265%) hue-rotate(83deg) brightness(123%) contrast(120%);
+}

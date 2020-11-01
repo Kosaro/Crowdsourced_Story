@@ -14,7 +14,6 @@
             $(".vote_icon_down").removeClass("pressed");
         });
 
-
 });
 </script>
 <head>
@@ -25,8 +24,10 @@
     </style>
 </head>
 <body>
+<div class="center header">
+    <img class="back" src="{% static 'icons/arrow-left.svg' %}" />
+</div>
 <div class="center content-grid">
-
     <p class="plot plot-point">{{plot_point}}</p>
 <div class="votes_wrapper">
     <div class="votes">
@@ -40,6 +41,7 @@
             <span >{{ choice }}</span>
         </div>
     {% endfor %}
+        <img class="add_choice" src="{% static 'icons/plus.svg' %}" />
   </div>
 </div>
 </div>

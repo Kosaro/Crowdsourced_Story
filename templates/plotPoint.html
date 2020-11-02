@@ -30,12 +30,15 @@
     <div class="header-right">Username</div>
 </div>
 <div class="center content-grid">
-    <p class="plot plot-point">{{plot_point}}</p>
+    <div class="plot-point">{{plot_point}}</div>
 <div class="votes_wrapper">
     <div class="votes">
         <img class="plot_vote vote_icon_up" src="{% static 'icons/triangle.svg' %}" />
         <img class="plot_vote vote_icon_down " src="{% static 'icons/triangle.svg' %}" />
     </div>
+</div>
+<div class="author">
+     Written by Ella
 </div>
 <div class="choices">
     {% for choice in choices %}

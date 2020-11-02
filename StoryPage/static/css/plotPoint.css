@@ -145,7 +145,6 @@ button{
 }
 .back:hover{
   filter: invert(32%) sepia(73%) saturate(6721%) hue-rotate(352deg) brightness(92%) contrast(93%);
-
 }
 
 .plot-point{

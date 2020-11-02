@@ -11,6 +11,5 @@ def plot_point(request):
            'cupidatat non proident, sunt in culpa qui officia deserunt mollit ' \
            'anim id est laborum'
     choices = ['Choice 1', 'Choice 2', 'Choice 3']
-    choices = list(range(20))
     context = {'plot_point': text, 'choices': choices}
     return render(request, 'plotPoint.html', context)

@@ -7,11 +7,11 @@
     $(document).ready(function() {
         $(".vote_icon_down").click(function () {
             $(this).toggleClass("pressed");
-            $(".vote_icon_up").removeClass("pressed");
+            $(this).parent().find(".vote_icon_up").removeClass("pressed");
         });
         $(".vote_icon_up").click(function () {
             $(this).toggleClass("pressed");
-            $(".vote_icon_down").removeClass("pressed");
+            $(this).parent().find(".vote_icon_down").removeClass("pressed");
         });
 
 });
@@ -25,19 +25,25 @@
 </head>
 <body>
 <div class="center header">
-    <img class="back" src="{% static 'icons/arrow-left.svg' %}" />
+    <div class="header-left"> <img class="back" src="{% static 'icons/arrow-left.svg' %}" /></div>
+    <div class="title">Crowdsourced Story</div>
+    <div class="header-right">Username</div>
 </div>
 <div class="center content-grid">
     <p class="plot plot-point">{{plot_point}}</p>
 <div class="votes_wrapper">
     <div class="votes">
-        <img class="vote_icon_up" src="{% static 'icons/triangle.svg' %}" />
-        <img class="vote_icon_down " src="{% static 'icons/triangle.svg' %}" />
+        <img class="plot_vote vote_icon_up" src="{% static 'icons/triangle.svg' %}" />
+        <img class="plot_vote vote_icon_down " src="{% static 'icons/triangle.svg' %}" />
     </div>
 </div>
 <div class="choices">
     {% for choice in choices %}
         <div class="btn btn-animation">
+            <div class="votes">
+                <img class="choice_vote vote_icon_up" src="{% static 'icons/menu-up.svg' %}" />
+                <img class="choice_vote vote_icon_down " src="{% static 'icons/menu-up.svg' %}" />
+            </div>
             <span >{{ choice }}</span>
         </div>
     {% endfor %}

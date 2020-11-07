@@ -13,6 +13,14 @@
             $(this).toggleClass("pressed");
             $(this).parent().find(".vote_icon_down").removeClass("pressed");
         });
+        $("#add_choice_button").click(function (){
+            $(this).hide();
+            $("#add_choice").show();
+        });
+        $(".close_new_choice").click(function (){
+            $("#add_choice_button").show();
+            $("#add_choice").hide();
+        });
 
 });
 </script>
@@ -50,8 +58,27 @@
             <span >{{ choice }}</span>
         </div>
     {% endfor %}
-        <img class="add_choice" src="{% static 'icons/plus.svg' %}" />
+        <img id="add_choice_button" src="{% static 'icons/plus.svg' %}" />
   </div>
+<div id="add_choice">
+    <div class="text_box_label">Choice:</div>
+    <input class="text_box">
+    <div id="plot_labal_container" class="text_box_label">
+        <div>Next part of the story:</div>
+        <div class="switch_container" >
+            New
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            Link
+        </div>
+    </div>
+    <textarea class="text_box story_text_box"></textarea>
+    <div id="buttons">
+        <button class="close_new_choice">Cancel</button>
+        <button class="close_new_choice" >Submit</button>
+    </div>
 </div>
 </div>
 

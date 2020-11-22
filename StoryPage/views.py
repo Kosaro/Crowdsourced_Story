@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 def plot_point(request):
     text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' \
@@ -11,5 +10,7 @@ def plot_point(request):
            'cupidatat non proident, sunt in culpa qui officia deserunt mollit ' \
            'anim id est laborum'
     choices = ['Choice 1', 'Choice 2', 'Choice 3']
-    context = {'plot_point': text, 'choices': choices}
+    author = 'Ella'
+    votes = 0
+    context = {'plot_point': text, 'choices': choices, 'votes': votes, 'author': author}
     return render(request, 'plotPoint.html', context)

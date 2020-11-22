@@ -13,6 +13,9 @@
             $(this).toggleClass("pressed");
             $(this).parent().find(".vote_icon_down").removeClass("pressed");
         });
+        $(".favorite").click(function () {
+            $(this).toggleClass("pressed");
+        });
 
 });
 </script>
@@ -35,10 +38,17 @@
     <div class="votes">
         <img class="plot_vote vote_icon_up" src="{% static 'icons/triangle.svg' %}" />
         <img class="plot_vote vote_icon_down " src="{% static 'icons/triangle.svg' %}" />
+        <img class="favorite" src="{% static 'icons/star.svg' %}" />
+    </div>
+     <div style="display: none" id="votes_with_tally" class="votes">
+        <img class="plot_vote vote_icon_up" src="{% static 'icons/menu-up.svg' %}" />
+        <div id="vote_tally">0</div>
+        <img class="plot_vote vote_icon_down " src="{% static 'icons/menu-up.svg' %}" />
+        <img class="favorite" src="{% static 'icons/star.svg' %}" />
     </div>
 </div>
 <div class="author">
-     Written by Ella
+     Written by {{ author }}
 </div>
 <div class="choices">
     {% for choice in choices %}

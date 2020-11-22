@@ -7,6 +7,8 @@ class PlotPoint(models.Model):
     dv = models.IntegerField(default=0)
     isEnd = models.BooleanField(default=False)
     writtenby = models.CharField(max_length=50)
+    def __str__(self):
+        return self.pptext
 
 class Choice(models.Model):
     plotpoint = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
@@ -14,10 +16,14 @@ class Choice(models.Model):
     uv = models.IntegerField(default=0)
     dv = models.IntegerField(default=0)
     writtenby = models.CharField(max_length=50)
+    def __str__(self):
+        return self.text
 
 class User(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=30)
+    def __str__(self):
+        return self.username
 
 class Bookmark(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -21,6 +21,9 @@
             $("#add_choice_button").show();
             $("#add_choice").hide();
         });
+        $(".favorite").click(function () {
+            $(this).toggleClass("pressed");
+        });
 
 });
 </script>
@@ -35,7 +38,7 @@
 <div class="center header">
     <div class="header-left"> <img class="back" src="{% static 'icons/arrow-left.svg' %}" /></div>
     <div class="title">Crowdsourced Story</div>
-    <div class="header-right">Username</div>
+    <div class="header-right">Username<img id="user-profile_menu-arrow" src="{% static 'icons/menu-up.svg' %}"/> </div>
 </div>
 <div class="center content-grid">
     <div class="plot-point">{{plot_point}}</div>
@@ -43,10 +46,17 @@
     <div class="votes">
         <img class="plot_vote vote_icon_up" src="{% static 'icons/triangle.svg' %}" />
         <img class="plot_vote vote_icon_down " src="{% static 'icons/triangle.svg' %}" />
+        <img class="favorite" src="{% static 'icons/star.svg' %}" />
+    </div>
+     <div style="display: none" id="votes_with_tally" class="votes">
+        <img class="plot_vote vote_icon_up" src="{% static 'icons/menu-up.svg' %}" />
+        <div id="vote_tally">0</div>
+        <img class="plot_vote vote_icon_down " src="{% static 'icons/menu-up.svg' %}" />
+        <img class="favorite" src="{% static 'icons/star.svg' %}" />
     </div>
 </div>
 <div class="author">
-     Written by Ella
+     Written by {{ author }}
 </div>
 <div class="choices">
     {% for choice in choices %}

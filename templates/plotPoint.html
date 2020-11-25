@@ -38,20 +38,28 @@
 <div class="center header">
     <div class="header-left"> <img class="back" src="{% static 'icons/arrow-left.svg' %}" /></div>
     <div class="title">Crowdsourced Story</div>
-    <div class="header-right">Username<img id="user-profile_menu-arrow" src="{% static 'icons/menu-up.svg' %}"/> </div>
+    <div class="header-right dropdown" style="width: fit-content">
+            <span>{{ username }}</span>
+            <div class="dropdown-content">
+                <div class="dropdown-list">
+                    <span>View profile</span>
+                    <span>Sign out</span>
+                </div>
+            </div>
+    </div>
 </div>
 <div class="center content-grid">
     <div class="plot-point">{{plot_point}}</div>
 <div class="votes_wrapper">
     <div class="votes">
         <img class="plot_vote vote_icon_up" src="{% static 'icons/triangle.svg' %}" />
-        <img class="plot_vote vote_icon_down " src="{% static 'icons/triangle.svg' %}" />
+        <img class="plot_vote vote_icon_down" src="{% static 'icons/triangle.svg' %}" />
         <img class="favorite" src="{% static 'icons/star.svg' %}" />
     </div>
      <div style="display: none" id="votes_with_tally" class="votes">
         <img class="plot_vote vote_icon_up" src="{% static 'icons/menu-up.svg' %}" />
         <div id="vote_tally">0</div>
-        <img class="plot_vote vote_icon_down " src="{% static 'icons/menu-up.svg' %}" />
+        <img class="plot_vote vote_icon_down" src="{% static 'icons/menu-up.svg' %}" />
         <img class="favorite" src="{% static 'icons/star.svg' %}" />
     </div>
 </div>

@@ -57,3 +57,4 @@ class Choice_Downvotes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
+

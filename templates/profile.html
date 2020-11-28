@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<div class="center header">
+    <div class="header-left"> <img class="back" src="{% static 'icons/arrow-left.svg' %}" /></div>
+    <div class="title">Crowdsourced Story</div>
+    <div class="header-right dropdown" style="width: fit-content">
+        <span>{{ username }}</span>
+        <div class="dropdown-content">
+            <div class="dropdown-list">
+                <span>View profile</span>
+                <span>Sign out</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="center content-grid">
+        <div class="top">
+            <span>Contributions</span>
+            <span>upvotes</span>
+            <span>Username</span>
+        </div>
+        <div>
+            <span>Score</span>
+            <span>Contribution</span>
+            {% for post in posts %}
+                <div>
+                    <span>10</span>
+                    <span >{{ post }}</span>
+                </div>
+            {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

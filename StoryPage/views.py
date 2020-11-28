@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.views.generic import CreateView
 
 
 def plot_point(request):
@@ -17,3 +16,8 @@ def plot_point(request):
     context = {'plot_point': text, 'choices': choices, 'votes': votes, 'author': author, 'username': 'Jenna the Rogue'}
     return render(request, 'plotPoint.html', context)
 
+
+def profile(request):
+    posts = ['post one', 'post two', 'post 3']
+    context = {'posts': posts}
+    return render(request, 'profile.html', context)

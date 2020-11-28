@@ -3,11 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}" />
     <title>Profile</title>
 </head>
 <body>
 <div class="center header">
-    <div class="header-left"> <img class="back" src="{% static 'icons/arrow-left.svg' %}" /></div>
+    <div class="header-left"><img class="back" src="{% static 'icons/arrow-left.svg' %}" /></div>
     <div class="title">Crowdsourced Story</div>
     <div class="header-right dropdown" style="width: fit-content">
         <span>{{ username }}</span>
@@ -18,21 +20,29 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div class="center content-grid">
-        <div class="top">
-            <span>Contributions</span>
-            <span>upvotes</span>
-            <span>Username</span>
+    <div class="center main-column">
+        <div id="summary-grid">
+            <span id="contribution-header">Contributions</span>
+            <span id="upvotes-received-header">Upvotes received</span>
+            <span id="votes-cast-header">Votes cast</span>
+            <span id="contribution-number" class="summary-value">4</span>
+            <span id="upvotes-received-number" class="summary-value">3</span>
+            <span id="votes-cast-number" class="summary-value">12</span>
         </div>
-        <div>
-            <span>Score</span>
-            <span>Contribution</span>
+        <div id="contribution-grid">
+        <div class="bottom-border">
+            <span class="contribution-score-header">Score</span>
+        </div>
+            <div class="bottom-border">
+                <span>Contribution</span>
+            </div>
             {% for post in posts %}
-                <div>
+                <div class="score-cell">
                     <span>10</span>
-                    <span >{{ post }}</span>
                 </div>
+                <span class="contribution-cell">{{ post }}</span>
             {% endfor %}
     </div>
 </div>

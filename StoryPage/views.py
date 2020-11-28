@@ -18,6 +18,8 @@ def plot_point(request):
 
 
 def profile(request):
-    posts = ['post one', 'post two', 'post 3']
-    context = {'posts': posts}
+    posts = ['testing testing, this is a really long . What happens if I make it so long that it goes on to the next line? '
+             'I guess that what we\'re about to find out. post that i want to test', 'post two', 'post 3']
+    username = 'Ella'
+    context = {'posts': posts, 'username': username}
     return render(request, 'profile.html', context)

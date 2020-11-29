@@ -9,6 +9,9 @@ html {
   color: white;
 }
 
+a{
+  color: white;
+}
 
 button{
   font-family: "Open Sans";
@@ -21,7 +24,7 @@ button{
 }
 
 .dropdown-content {
-  top: 1rem;
+  top: .9rem;
   display: none;
   position: absolute;
   background-color: #333;
@@ -35,7 +38,7 @@ button{
   font-size: .6rem;
   display: flex;
   flex-direction: column;
-    align-items: flex-end;
+  align-items: flex-end;
 }
 
 .dropdown:hover .dropdown-content {
@@ -150,13 +153,13 @@ button{
   display: flex;
   justify-content: center;
 }
+
 .header-right{
   flex: 1;
   display: flex;
   justify-content: flex-end ;
   align-content: center;
   width: fit-content;
-
 }
 
 .header-left{

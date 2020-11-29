@@ -1,8 +1,7 @@
 {% load static %}
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="{% static 'jquery-3.5.1.min.js' %}"></script>
 <script type='text/javascript'>
     $(document).ready(function() {
         $(".vote_icon_down").click(function () {
@@ -42,7 +41,7 @@
             <span>{{ username }}</span>
             <div class="dropdown-content">
                 <div class="dropdown-list">
-                    <span>View profile</span>
+                    <a href="{% url 'profile' %}">View profile</a>
                     <span>Sign out</span>
                 </div>
             </div>

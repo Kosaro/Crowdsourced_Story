@@ -79,16 +79,15 @@ html {
 }
 
 .main-column{
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
+    margin-left: 5rem;
     display: flex;
     flex-direction: column;
     align-content: center;
 }
 
 #summary-grid{
-    margin-top: 1rem;
     display: grid;
-    grid-column-gap: 3rem;
     grid-row-gap: 0;
     justify-items: center;
     grid-template-columns: 1fr 1fr 1fr;
@@ -125,7 +124,7 @@ html {
     display: grid;
     grid-column-gap: 0rem;
     grid-row-gap: 0rem;
-    grid-template-columns: max-content auto;
+    grid-template-columns:  max-content auto;
 }
 .bottom-border{
     border-bottom: ridge rgba(255,255,255,.3) 1px ;
@@ -135,12 +134,53 @@ html {
     justify-content: center;
     align-items: center;
     margin-right: 1rem;
+    font-size: 1.15rem;
+}
+.author-cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    font-size: .75rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
 }
 .contribution-cell{
     padding-top: .5rem;
     padding-bottom: .5rem;
     border-bottom: ridge rgba(255,255,255,.3) 1px ;
+    transition: all 0.3s;
 }
+
 .contribution-score-header{
     margin-right: 1rem;
+}
+
+#options-menu{
+    position: fixed;
+    width: 80px;
+    font-size: .8rem;
+    height: 100%;
+    border-right: ridge rgba(255,255,255,.3) 1px ;
+    margin-top: -1rem;
+}
+
+.option{
+    padding-top: .125rem;
+    padding-bottom: .125rem;
+}
+
+#favorites {
+    display: none;
+}
+#options {
+    display: none;
+}
+
+.pressed {
+    background: rgba(255,255,255,.1);
+}
+
+.contribution-cell:hover{
+    background: rgba(255,255,255,.1);
 }

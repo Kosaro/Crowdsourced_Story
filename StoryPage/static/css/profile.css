@@ -169,15 +169,20 @@ html {
     padding-top: .125rem;
     padding-bottom: .125rem;
 }
+.option:hover{
+    transition: all 0.3s;
+    background: rgba(255,255,255,.05);
+}
 
 #favorites {
     display: none;
 }
+
 #options {
     display: none;
 }
 
-.pressed {
+.option.pressed {
     background: rgba(255,255,255,.1);
 }
 

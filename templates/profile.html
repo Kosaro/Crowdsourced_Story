@@ -28,6 +28,9 @@
             $("#overview_option").removeClass("pressed");
             $("#favorites_option").removeClass("pressed");
         });
+        $(".back").click(function (){
+            window.history.back();
+        });
     });
 </script>
 <head>
@@ -44,7 +47,6 @@
         <span>{{ username }}</span>
         <div class="dropdown-content">
             <div class="dropdown-list">
-                <span>View profile</span>
                 <span>Sign out</span>
             </div>
         </div>

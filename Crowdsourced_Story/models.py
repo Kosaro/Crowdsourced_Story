@@ -12,6 +12,7 @@ class PlotPoint(models.Model):
 
 class Choice(models.Model):
     plotpoint = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
+    destination = models.OneToOneField(PlotPoint, on_delete=models.CASCADE)
     text = models.CharField(max_length=100)
     uv = models.IntegerField(default=0)
     dv = models.IntegerField(default=0)
@@ -20,7 +21,7 @@ class Choice(models.Model):
         return self.text
 
 class User(models.Model):
-    username = models.CharField(max_length=50)
+    username = models.CharField(max_length=20)
     password = models.CharField(max_length=30)
     def __str__(self):
         return self.username

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Crowdsourced_Story.models import PlotPoint, Choice, User
+from StoryPage.models import PlotPoint, Choice, User
 
 
 @admin.register(PlotPoint)

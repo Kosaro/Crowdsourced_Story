@@ -15,7 +15,7 @@ class PlotPoint(models.Model):
 
 class Choice(models.Model):
     plotpoint = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
-    destination = models.OneToOneField(PlotPoint, related_name='+', on_delete=models.CASCADE)
+    destination = models.OneToOneField(PlotPoint, related_name='+', on_delete=models.CASCADE, default=None)
     text = models.CharField(max_length=100)
     uv = models.IntegerField(default=0)
     dv = models.IntegerField(default=0)

@@ -12,7 +12,7 @@ def plot_point(request, plot_point_id):
     author = plot.writtenby
     votes = plot.uv
     context = {'plot_point': text, 'choices': choices, 'votes': votes, 'author': author,
-               'username': 'Jenna the Rogue', 'plot_point_id': plot_point_id,
+               'username': 'Jenna', 'plot_point_id': plot_point_id,
                'bookmarked': False}
     return render(request, 'plotPoint.html', context)
 
@@ -42,11 +42,11 @@ def add_choice(request, form_class=NewChoiceForm):
             author = User.objects.get(pk=author_name)
             prevpp.isEnd = False
             prevpp.save()
-            newplotpoint = PlotPoint(pptext=plotpoint_text, writtenby=author, id=5)
+            newplotpoint = PlotPoint(pptext=plotpoint_text, writtenby=author_name, id=5)
             newplotpoint.save()
-            newchoice = Choice(text=choice_text, writtenby=author, plotpoint=prevpp, destination=newplotpoint)
+            newchoice = Choice(text=choice_text, writtenby=author_name, plotpoint=prevpp, destination=newplotpoint)
             newchoice.save()
-            upvote(request, newplotpoint, author)
+            #upvote(request, newplotpoint, author)
             messages.success(request, "New choice added")
             return redirect(plot_point, plot_point_id)
 

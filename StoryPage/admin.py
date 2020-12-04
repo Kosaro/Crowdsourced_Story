@@ -4,7 +4,7 @@ from StoryPage.models import PlotPoint, Choice, User
 
 @admin.register(PlotPoint)
 class PlotPointAdmin(admin.ModelAdmin):
-    list_display = ['pptext', 'writtenby', 'uv', 'dv']
+    list_display = ['id', 'pptext', 'writtenby', 'uv', 'dv']
     search_fields = ['pptext__startswith']
 
 

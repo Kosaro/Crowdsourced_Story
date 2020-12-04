@@ -12,6 +12,7 @@ class PlotPointAdmin(admin.ModelAdmin):
 class ChoiceAdmin(admin.ModelAdmin):
     list_display = ['text', 'writtenby', 'uv', 'dv']
     search_fields = ['text__startswith']
+    readonly_fields = ('id',)
 
 
 @admin.register(User)

@@ -1,6 +1,8 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from StoryPage.DatabaseHelper import *
 from StoryPage.forms import *
+from StoryPage.models import *
 from django.contrib import messages
 
 
@@ -61,4 +63,23 @@ def add_choice(request, form_class=NewChoiceForm):
             messages.success(request, "New choice added")
             return redirect(plot_point, plot_point_id)
 
+
+# favorite but i called it bookmark in the db
+def toggle_bookmark(request, form_class=ToggleBookmarkForm):
+    print(request.method)
+    if request.method == 'POST':
+        form = form_class(request.POST)
+        if form.is_valid():
+            plot_point_id = form.cleaned_data['plot_point_id']
+            user = form.cleaned_data['user']
+            plot = PlotPoint.objects.get(pk=plot_point_id)
+            current_user = User.objects.get(pk=user)
+            try:
+                bookmark = Bookmark.objects.filter(user=current_user, plot_point=plot)
+                bookmark.delete()
+            except Bookmark.DoesNotExist:
+                newbookmark = Bookmark(user=current_user, plot_point=plot)
+                newbookmark.save()
+            return HttpResponse('Toggled bookmark')
+    return HttpResponse('Failed to toggle bookmark')
 

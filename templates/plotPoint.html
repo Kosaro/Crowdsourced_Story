@@ -22,6 +22,7 @@
         });
         $(".favorite").click(function () {
             $(this).toggleClass("pressed");
+            $("#toggle_bookmark").post()
         });
         $(".back").click(function (){
             window.history.back();
@@ -56,7 +57,13 @@
     <div class="votes">
         <img class="plot_vote vote_icon_up" src="{% static 'icons/triangle.svg' %}" />
         <img class="plot_vote vote_icon_down" src="{% static 'icons/triangle.svg' %}" />
-        <img class="favorite" src="{% static 'icons/star.svg' %}" />
+        <form id= "toggle_bookmark" action="/toggle_bookmark/" method="post">
+            {% csrf_token %}
+            <img class="favorite" src="{% static 'icons/star.svg' %}" />
+            <input type="hidden" name="plot_point_id" value="{{ plot_point_id }}">
+            <input type="hidden" name="user" value="{{ username }}">
+            <input type="submit" value="submit">
+        </form>
     </div>
      <div style="display: none" id="votes_with_tally" class="votes">
         <img class="plot_vote vote_icon_up" src="{% static 'icons/menu-up.svg' %}" />

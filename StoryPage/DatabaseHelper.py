@@ -34,7 +34,3 @@ def choice_downvote(choice, current_user):
     newDV.save()
 
 
-# favorite but i called it bookmark in the db
-def bookmark(plot_point, current_user):
-    newbookmark = Bookmark(user=current_user, plot_point=plot_point)
-    newbookmark.save()

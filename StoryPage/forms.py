@@ -9,4 +9,8 @@ class NewChoiceForm(forms.Form):
 class OpenPlotPointForm(forms.Form):
     destination_id = forms.IntegerField(label='destination_id')
 
+class ToggleBookmarkForm(forms.Form):
+    plot_point_id = forms.IntegerField(label='plot_point_id')
+    user = forms.CharField(label='user', max_length=20)
+
 

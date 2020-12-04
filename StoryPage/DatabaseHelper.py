@@ -1,4 +1,4 @@
-from models import *
+from StoryPage.models import *
 # returns a python dictionary of ALL of the choices for the passed-in plot point, ordered by upvote count.
 def get_choices(plot_point):
     choicelist = Choice.objects.all().filter(plotpoint=plot_point).order_by('uv').values('text')

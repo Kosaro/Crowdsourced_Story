@@ -9,13 +9,19 @@ from django.contrib import messages
 # this is the same render function that was filled with dummy data, but you have to pass a PlotPoint object to it.
 def plot_point(request, plot_point_id):
     plot = PlotPoint.objects.get(pk=plot_point_id)
+    user = User.objects.get(username="Jenna")
+    try:
+        Bookmark.objects.get(user=user,plot_point=plot_point_id)
+        bookmark = 1
+    except:
+        bookmark = 0
     text = plot.pptext
     choices = get_choices(plot)
     author = plot.writtenby
     votes = plot.uv
     context = {'plot_point': text, 'choices': choices, 'votes': votes, 'author': author,
                'username': 'Jenna', 'plot_point_id': plot_point_id,
-               'bookmarked': False}
+               'bookmarked': bookmark}
     return render(request, 'plotPoint.html', context)
 
 def open_plot_point(request, form_class=OpenPlotPointForm):
@@ -52,12 +58,12 @@ def add_choice(request, form_class=NewChoiceForm):
             plotpoint_text = form.cleaned_data['plot_point_text']
             author_name = form.cleaned_data['author']
             prevpp = PlotPoint.objects.get(pk=plot_point_id)
-            author = User.objects.get(pk=author_name)
+            author = User.objects.get(username=author_name)
             prevpp.isEnd = False
             prevpp.save()
             newplotpoint = PlotPoint(pptext=plotpoint_text, writtenby=author_name)
             newplotpoint.save()
-            newchoice = Choice(text=choice_text, writtenby=author_name, plotpoint=prevpp, destination=newplotpoint)
+            newchoice = Choice(text=choice_text, writtenby=author, plotpoint=prevpp, destination=newplotpoint)
             newchoice.save()
             #upvote(request, newplotpoint, author)
             messages.success(request, "New choice added")

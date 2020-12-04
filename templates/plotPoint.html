@@ -72,14 +72,17 @@
                 <img class="choice_vote vote_icon_up" src="{% static 'icons/menu-up.svg' %}" />
                 <img class="choice_vote vote_icon_down " src="{% static 'icons/menu-up.svg' %}" />
             </div>
-            <span >{{ choice }}</span>
+            <span >{{ choice.text }}</span>
         </div>
     {% endfor %}
         <img id="add_choice_button" src="{% static 'icons/plus.svg' %}" />
   </div>
-<div id="add_choice">
+<form id="add_choice" action="/add-choice/" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="plot_point_id" value="{{ plot_point_id }}">
+    <input type="hidden" name="author" value="{{ username }}">
     <div class="text_box_label">Choice:</div>
-    <input class="text_box">
+    <input class="text_box" name="choice_text">
     <div id="plot_labal_container" class="text_box_label">
         <div>Next part of the story:</div>
         <div class="switch_container" >
@@ -91,12 +94,12 @@
             Link
         </div>
     </div>
-    <textarea class="text_box story_text_box"></textarea>
+    <textarea class="text_box story_text_box" name="plot_point_text"></textarea>
     <div id="buttons">
         <button class="close_new_choice">Cancel</button>
         <button class="close_new_choice" >Submit</button>
     </div>
-</div>
+</form>
 </div>
 
 </body>

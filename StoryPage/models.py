@@ -7,6 +7,7 @@ class PlotPoint(models.Model):
     dv = models.IntegerField(default=0)
     isEnd = models.BooleanField(default=False)
     writtenby = models.CharField(max_length=50)
+    id = models.IntegerField(primary_key=True)
     def __str__(self):
         return self.pptext
 

@@ -53,7 +53,7 @@ def add_choice(request, form_class=NewChoiceForm):
             author = User.objects.get(pk=author_name)
             prevpp.isEnd = False
             prevpp.save()
-            newplotpoint = PlotPoint(pptext=plotpoint_text, writtenby=author_name, id=5)
+            newplotpoint = PlotPoint(pptext=plotpoint_text, writtenby=author_name)
             newplotpoint.save()
             newchoice = Choice(text=choice_text, writtenby=author_name, plotpoint=prevpp, destination=newplotpoint)
             newchoice.save()

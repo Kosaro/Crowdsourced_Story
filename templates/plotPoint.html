@@ -22,12 +22,28 @@
         });
         $(".favorite").click(function () {
             $(this).toggleClass("pressed");
-            $("#toggle_bookmark").post()
+            $("#toggle_bookmark").submit()
         });
         $(".back").click(function (){
             window.history.back();
         });
-
+        $(function() {
+            $("#toggle_bookmark").submit(function(event) {
+                // Stop form from submitting normally
+                event.preventDefault();
+                var friendForm = $(this);
+                // Send the data using post
+                var posting = $.post( friendForm.attr('action'), friendForm.serialize() );
+                // if success:
+                posting.done(function(data) {
+                    // success actions, maybe change submit button to 'friend added' or whatever
+                });
+                // if failure:
+                posting.fail(function(data) {
+                    // 4xx or 5xx response, alert user about failure
+                });
+            });
+        });
 });
 </script>
 <head>
@@ -62,7 +78,6 @@
             <img class="favorite" src="{% static 'icons/star.svg' %}" />
             <input type="hidden" name="plot_point_id" value="{{ plot_point_id }}">
             <input type="hidden" name="user" value="{{ username }}">
-            <input type="submit" value="submit">
         </form>
     </div>
      <div style="display: none" id="votes_with_tally" class="votes">

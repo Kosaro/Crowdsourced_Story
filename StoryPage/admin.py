@@ -6,13 +6,15 @@ from StoryPage.models import Upvotes, Downvotes, Choice_Upvotes, Choice_Downvote
 @admin.register(PlotPoint)
 class PlotPointAdmin(admin.ModelAdmin):
     list_display = ['pptext', 'writtenby', 'uv', 'dv']
-    search_fields = ['pptext', 'id']
+    search_fields = ['pptext']
+    readonly_fields = ('id',)
 
 
 @admin.register(Choice)
 class ChoiceAdmin(admin.ModelAdmin):
     list_display = ['text', 'writtenby', 'uv', 'dv']
-    search_fields = ['text', 'id']
+    search_fields = ['text']
+    readonly_fields = ('id',)
 
 
 @admin.register(User)

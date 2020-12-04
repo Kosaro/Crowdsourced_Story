@@ -75,7 +75,7 @@ def toggle_bookmark(request, form_class=ToggleBookmarkForm):
             plot = PlotPoint.objects.get(pk=plot_point_id)
             current_user = User.objects.get(pk=user)
             try:
-                bookmark = Bookmark.objects.filter(user=current_user, plot_point=plot)
+                bookmark = Bookmark.objects.get(user=current_user, plot_point=plot)
                 bookmark.delete()
             except Bookmark.DoesNotExist:
                 newbookmark = Bookmark(user=current_user, plot_point=plot)

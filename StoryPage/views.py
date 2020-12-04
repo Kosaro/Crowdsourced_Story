@@ -16,6 +16,15 @@ def plot_point(request, plot_point_id):
                'bookmarked': False}
     return render(request, 'plotPoint.html', context)
 
+def open_plot_point(request, form_class=OpenPlotPointForm):
+    print(request.method)
+    if request.method == 'POST':
+        form = form_class(request.POST)
+        if form.is_valid():
+            destination_id = form.cleaned_data['destination_id']
+            return redirect(plot_point, destination_id)
+
+
 
 def profile(request):
     posts = [
@@ -25,6 +34,8 @@ def profile(request):
     username = 'Ella'
     context = {'posts': posts, 'username': username, 'favorites': favorites}
     return render(request, 'profile.html', context)
+
+
 
 
 # creates a new choice, and the following plot point. auto-upvotes for author. returns the new plotpoint object.

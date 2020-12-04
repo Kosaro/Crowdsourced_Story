@@ -6,6 +6,7 @@ urlpatterns = [
     path('<int:plot_point_id>/', views.plot_point, name='plot_point'),
     path('profile', views.profile, name='profile'),
     path('add-choice/', views.add_choice, name='add_choice'),
+    path('open_plot_point/', views.open_plot_point, name='open_plot_point'),
     # ex: /StoryPage/5/
     #path('<int:question_id>/', views.detail, name='detail'),
     # ex: /StoryPage/5/results/

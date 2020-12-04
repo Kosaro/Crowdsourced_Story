@@ -6,3 +6,7 @@ class NewChoiceForm(forms.Form):
     plot_point_id = forms.IntegerField(label='plot_point_id')
     author = forms.CharField(label='author', max_length=20)
 
+class OpenPlotPointForm(forms.Form):
+    destination_id = forms.IntegerField(label='destination_id')
+
+

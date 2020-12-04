@@ -67,17 +67,21 @@
 </div>
 <div class="choices">
     {% for choice in choices %}
-        <div class="btn btn-animation">
+        <form action="/open_plot_point/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="destination_id" value="{{ choice.destination_id }}">
+        <div class="btn btn-animation"onclick="javascript:this.parentNode.submit();">
             <div class="votes">
                 <img class="choice_vote vote_icon_up" src="{% static 'icons/menu-up.svg' %}" />
                 <img class="choice_vote vote_icon_down " src="{% static 'icons/menu-up.svg' %}" />
             </div>
             <span >{{ choice.text }}</span>
         </div>
+        </form>
     {% endfor %}
         <img id="add_choice_button" src="{% static 'icons/plus.svg' %}" />
   </div>
-<form id="add_choice" action="/add-choice/" method="post">
+<form id="add_choice" action="/add-choice/" method="post" >
     {% csrf_token %}
     <input type="hidden" name="plot_point_id" value="{{ plot_point_id }}">
     <input type="hidden" name="author" value="{{ username }}">

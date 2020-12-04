@@ -73,7 +73,7 @@ def toggle_bookmark(request, form_class=ToggleBookmarkForm):
             plot_point_id = form.cleaned_data['plot_point_id']
             user = form.cleaned_data['user']
             plot = PlotPoint.objects.get(pk=plot_point_id)
-            current_user = User.objects.get(pk=user)
+            current_user = User.objects.get(username=user)
             try:
                 bookmark = Bookmark.objects.get(user=current_user, plot_point=plot)
                 bookmark.delete()

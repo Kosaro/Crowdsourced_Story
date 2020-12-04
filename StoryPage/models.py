@@ -25,7 +25,7 @@ class Choice(models.Model):
 
 
 class User(models.Model):
-    username = models.CharField(max_length=20, primary_key=True)
+    username = models.CharField(max_length=20, unique=True)
     password = models.CharField(max_length=30)
 
     def __str__(self):
@@ -70,4 +70,3 @@ class Choice_Downvotes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
-

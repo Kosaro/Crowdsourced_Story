@@ -37,13 +37,14 @@ def add_choice(request, form_class=NewChoiceForm):
             plot_point_id = form.cleaned_data['plot_point_id']
             choice_text = form.cleaned_data['choice_text']
             plotpoint_text = form.cleaned_data['plot_point_text']
-            author = form.cleaned_data['author']
+            author_name = form.cleaned_data['author']
             prevpp = PlotPoint.objects.get(pk=plot_point_id)
+            author = User.objects.get(pk=author_name)
             prevpp.isEnd = False
             prevpp.save()
-            newplotpoint = PlotPoint(pptext=plotpoint_text, writtenby=author)
+            newplotpoint = PlotPoint(pptext=plotpoint_text, writtenby=author, id=5)
             newplotpoint.save()
-            newchoice = Choice(text=choice_text, writtenby=author, plotpoint=prevpp, destination=newplotpoint.id)
+            newchoice = Choice(text=choice_text, writtenby=author, plotpoint=prevpp, destination=newplotpoint)
             newchoice.save()
             upvote(request, newplotpoint, author)
             messages.success(request, "New choice added")

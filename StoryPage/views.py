@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from StoryPage.DataBaseHelper import *
+from StoryPage.DatabaseHelper import *
 
 # this is the same render function that was filled with dummy data, but you have to pass a PlotPoint object to it.
 def plot_point(request, plot_point):

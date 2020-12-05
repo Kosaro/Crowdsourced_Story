@@ -54,11 +54,18 @@ def profile(request):
     username="Jenna"
     user = User.objects.get(username=username)
     posts = PlotPoint.objects.filter(writtenby=user).values('pptext', 'uv')
+    votes_cast = Upvotes.objects.filter(user=user).count()
     posts = [(f['pptext'], f['uv']) for f in posts]
+    total_upvotes = 0
+    num_posts=0
+    for _, votes in posts:
+        total_upvotes += int(votes)
+        num_posts += 1
     favorites = Bookmark.objects.filter(user=user).values('plot_point__pptext', 'plot_point__writtenby')
     favorites = [(f['plot_point__pptext'], f['plot_point__writtenby']) for f in favorites]
 
-    context = {'posts': posts, 'username': username, 'favorites': favorites}
+    context = {'posts': posts, 'username': username, 'favorites': favorites, 'votes_cast': votes_cast,
+               'total_upvotes':total_upvotes, 'num_posts': num_posts}
     return render(request, 'profile.html', context)
 
 
@@ -83,7 +90,6 @@ def add_choice(request, form_class=NewChoiceForm):
             newplotpoint.save()
             newchoice = Choice(text=choice_text, writtenby=author, plotpoint=prevpp, destination=newplotpoint)
             newchoice.save()
-            #upvote(request, newplotpoint, author)
             messages.success(request, "New choice added")
             return redirect(plot_point, plot_point_id)
 

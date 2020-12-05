@@ -32,7 +32,7 @@ def plot_point(request, plot_point_id):
     author = plot.writtenby
     votes = plot.uv
     context = {'plot_point': text, 'choices': choices, 'votes': votes, 'author': author,
-               'username': 'Jenna', 'plot_point_id': plot_point_id,
+               'username': user, 'plot_point_id': plot_point_id,
                'bookmarked': bookmark,
                'upvoted': upvoted,
                'downvoted': downvoted}
@@ -54,15 +54,15 @@ def profile(request):
         'I guess that what we\'re about to find out. post that i want to test', 'post two', 'post 3']
     favorites = ['posts', 'post2']
     username=request.user
-    posts = PlotPoint.objects.filter(writtenby=user).values('pptext', 'uv')
-    votes_cast = Upvotes.objects.filter(user=user).count()
+    posts = PlotPoint.objects.filter(writtenby=username).values('pptext', 'uv')
+    votes_cast = Upvotes.objects.filter(user=username).count()
     posts = [(f['pptext'], f['uv']) for f in posts]
     total_upvotes = 0
     num_posts=0
     for _, votes in posts:
         total_upvotes += int(votes)
         num_posts += 1
-    favorites = Bookmark.objects.filter(user=user).values('plot_point__pptext', 'plot_point__writtenby')
+    favorites = Bookmark.objects.filter(user=username).values('plot_point__pptext', 'plot_point__writtenby')
     favorites = [(f['plot_point__pptext'], f['plot_point__writtenby']) for f in favorites]
 
     context = {'posts': posts, 'username': username, 'favorites': favorites, 'votes_cast': votes_cast,

@@ -55,6 +55,11 @@
         if({{ downvoted }}==1){
             $(".vote_icon_down").addClass("pressed");
         }
+        if(!!window.performance && window.performance.navigation.type === 2)
+{
+    console.log('Reloading');
+    window.location.reload();
+}
 });
 </script>
 <head>

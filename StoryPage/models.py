@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -24,49 +25,41 @@ class Choice(models.Model):
         return self.text
 
 
-class User(models.Model):
-    username = models.CharField(max_length=20, unique=True)
-    password = models.CharField(max_length=30)
-
-    def __str__(self):
-        return self.username
-
-
 class Bookmark(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField(max_length=30)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
 
 
 class Edits(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField(max_length=30)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
     request_status = models.BooleanField(default=True)
 
 
 class Choice_Edits(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField(max_length=30)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
     request_status = models.BooleanField(default=True)
 
 
 class Upvotes(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField(max_length=30)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
 
 
 class Downvotes(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField(max_length=30)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
 
 
 class Choice_Upvotes(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField(max_length=30)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
 
 
 class Choice_Downvotes(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.CharField(max_length=30)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)

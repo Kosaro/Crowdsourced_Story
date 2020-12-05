@@ -68,7 +68,11 @@ def profile(request):
                'total_upvotes':total_upvotes, 'num_posts': num_posts}
     return render(request, 'profile.html', context)
 
+def log_in(request):
+    return render(request, 'login.html')
 
+def sign_up(request):
+    return render(request, 'signUp.html')
 
 
 # creates a new choice, and the following plot point. auto-upvotes for author. returns the new plotpoint object.

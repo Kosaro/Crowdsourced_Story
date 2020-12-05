@@ -51,7 +51,12 @@ def profile(request):
         'testing testing, this is a really long . What happens if I make it so long that it goes on to the next line? '
         'I guess that what we\'re about to find out. post that i want to test', 'post two', 'post 3']
     favorites = ['posts', 'post2']
-    username = 'Ella'
+    username="Jenna"
+    user = User.objects.get(username=username)
+    posts = PlotPoint.objects.filter(writtenby=user)
+    favorites = Bookmark.objects.filter(user=user).values('plot_point__pptext')
+    favorites = [f['plot_point__pptext'] for f in favorites]
+
     context = {'posts': posts, 'username': username, 'favorites': favorites}
     return render(request, 'profile.html', context)
 

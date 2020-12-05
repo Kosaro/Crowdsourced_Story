@@ -146,6 +146,7 @@ button{
   display: flex;
   align-items: center;
   flex-direction: row;
+  width: fit-content;
 }
 
 .title{
@@ -192,6 +193,7 @@ button{
 .plot-point{
   grid-area: plot;
   text-align: justify;
+  width: 600px;
 }
 .choices{
   grid-area: choices;

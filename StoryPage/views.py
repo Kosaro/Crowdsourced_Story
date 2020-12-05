@@ -53,9 +53,10 @@ def profile(request):
     favorites = ['posts', 'post2']
     username="Jenna"
     user = User.objects.get(username=username)
-    posts = PlotPoint.objects.filter(writtenby=user)
-    favorites = Bookmark.objects.filter(user=user).values('plot_point__pptext')
-    favorites = [f['plot_point__pptext'] for f in favorites]
+    posts = PlotPoint.objects.filter(writtenby=user).values('pptext', 'uv')
+    posts = [(f['pptext'], f['uv']) for f in posts]
+    favorites = Bookmark.objects.filter(user=user).values('plot_point__pptext', 'plot_point__writtenby')
+    favorites = [(f['plot_point__pptext'], f['plot_point__writtenby']) for f in favorites]
 
     context = {'posts': posts, 'username': username, 'favorites': favorites}
     return render(request, 'profile.html', context)
@@ -114,6 +115,8 @@ def toggle_upvote(request, form_class=ToggleUpvoteForm):
             plot_point_id = form.cleaned_data['plot_point_id']
             user = form.cleaned_data['user']
             plot = PlotPoint.objects.get(pk=plot_point_id)
+            plot.uv += 1
+            plot.save()
             current_user = User.objects.get(username=user)
             try:
                 vote = Upvotes.objects.get(user=current_user, plot_point=plot)
@@ -132,6 +135,8 @@ def toggle_downvote(request, form_class=ToggleDownvoteForm):
             plot_point_id = form.cleaned_data['plot_point_id']
             user = form.cleaned_data['user']
             plot = PlotPoint.objects.get(pk=plot_point_id)
+            plot.uv -= 1
+            plot.save()
             current_user = User.objects.get(username=user)
             try:
                 vote = Downvotes.objects.get(user=current_user, plot_point=plot)

@@ -57,7 +57,7 @@
     <div id="options-menu">
         <div id="overview_option" class="option pressed">Overview</div>
         <div id="favorites_option" class="option">Favorites</div>
-        <div id="option_options" class="option">Options</div>
+        <div id="option_options" class="option"style="display: none">Options</div>
     </div>
     <div id="overview" class="main-column">
         <div id="summary-grid">
@@ -75,9 +75,9 @@
             <div class="bottom-border">
                 <span>Contribution</span>
             </div>
-            {% for post in posts %}
+            {% for post,score in posts %}
                 <div class="score-cell">
-                    <span>10</span>
+                    <span>{{ score }}</span>
                 </div>
                 <span class="contribution-cell">{{ post }}</span>
             {% endfor %}
@@ -91,13 +91,13 @@
             <div class="bottom-border">
                 <span>Favorite</span>
             </div>
-            {% for favorite in favorites %}
-                <div class="author-cell">123456789012</div>
+            {% for favorite, author in favorites %}
+                <div class="author-cell">{{ author }}</div>
                 <span class="contribution-cell">{{ favorite }}</span>
             {% endfor %}
     </div>
 </div>
-<div class="main-column" id="options" >
+<div class="main-column" id="options" style="display: none">
     Placeholder for options
 </div>
 </div>

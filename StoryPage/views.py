@@ -96,7 +96,8 @@ def add_choice(request, form_class=NewChoiceForm):
             newchoice = Choice(text=choice_text, writtenby=author, plotpoint=prevpp, destination=newplotpoint)
             newchoice.save()
             messages.success(request, "New choice added")
-            return redirect(plot_point, plot_point_id)
+    plot_point_id = form.cleaned_data['plot_point_id']
+    return redirect(plot_point, plot_point_id)
 
 
 # favorite but i called it bookmark in the db

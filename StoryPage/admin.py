@@ -14,11 +14,6 @@ class ChoiceAdmin(admin.ModelAdmin):
     search_fields = ['text', 'id']
 
 
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    list_display = ['username']
-    search_fields = ['username']
-
 @admin.register(Bookmark)
 class UserAdmin(admin.ModelAdmin):
     list_display = ['user', 'plot_point']

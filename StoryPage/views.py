@@ -4,12 +4,13 @@ from StoryPage.DatabaseHelper import *
 from StoryPage.forms import *
 from StoryPage.models import *
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 
 # this is the same render function that was filled with dummy data, but you have to pass a PlotPoint object to it.
 def plot_point(request, plot_point_id):
     plot = PlotPoint.objects.get(pk=plot_point_id)
-    user = User.objects.get(username="Jenna")
+    user = request.user
     try:
         Bookmark.objects.get(user=user,plot_point=plot_point_id)
         bookmark = 1
@@ -51,8 +52,7 @@ def profile(request):
         'testing testing, this is a really long . What happens if I make it so long that it goes on to the next line? '
         'I guess that what we\'re about to find out. post that i want to test', 'post two', 'post 3']
     favorites = ['posts', 'post2']
-    username="Jenna"
-    user = User.objects.get(username=username)
+    username=request.user
     posts = PlotPoint.objects.filter(writtenby=user).values('pptext', 'uv')
     posts = [(f['pptext'], f['uv']) for f in posts]
     favorites = Bookmark.objects.filter(user=user).values('plot_point__pptext', 'plot_point__writtenby')
@@ -76,7 +76,7 @@ def add_choice(request, form_class=NewChoiceForm):
             plotpoint_text = form.cleaned_data['plot_point_text']
             author_name = form.cleaned_data['author']
             prevpp = PlotPoint.objects.get(pk=plot_point_id)
-            author = User.objects.get(username=author_name)
+            author = request.user
             prevpp.isEnd = False
             prevpp.save()
             newplotpoint = PlotPoint(pptext=plotpoint_text, writtenby=author_name)
@@ -97,7 +97,7 @@ def toggle_bookmark(request, form_class=ToggleBookmarkForm):
             plot_point_id = form.cleaned_data['plot_point_id']
             user = form.cleaned_data['user']
             plot = PlotPoint.objects.get(pk=plot_point_id)
-            current_user = User.objects.get(username=user)
+            current_user = request.user.username
             try:
                 bookmark = Bookmark.objects.get(user=current_user, plot_point=plot)
                 bookmark.delete()
@@ -117,7 +117,7 @@ def toggle_upvote(request, form_class=ToggleUpvoteForm):
             plot = PlotPoint.objects.get(pk=plot_point_id)
             plot.uv += 1
             plot.save()
-            current_user = User.objects.get(username=user)
+            current_user = request.user
             try:
                 vote = Upvotes.objects.get(user=current_user, plot_point=plot)
                 vote.delete()
@@ -137,7 +137,7 @@ def toggle_downvote(request, form_class=ToggleDownvoteForm):
             plot = PlotPoint.objects.get(pk=plot_point_id)
             plot.uv -= 1
             plot.save()
-            current_user = User.objects.get(username=user)
+            current_user = request.user
             try:
                 vote = Downvotes.objects.get(user=current_user, plot_point=plot)
                 vote.delete()

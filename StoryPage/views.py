@@ -49,10 +49,6 @@ def open_plot_point(request, form_class=OpenPlotPointForm):
 
 
 def profile(request):
-    posts = [
-        'testing testing, this is a really long . What happens if I make it so long that it goes on to the next line? '
-        'I guess that what we\'re about to find out. post that i want to test', 'post two', 'post 3']
-    favorites = ['posts', 'post2']
     username=request.user
     posts = PlotPoint.objects.filter(writtenby=username).values('pptext', 'uv')
     votes_cast = Upvotes.objects.filter(user=username).count()

@@ -3,6 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path("", views.sign_up, name="default"),
     path('<int:plot_point_id>/', views.plot_point, name='plot_point'),
     path('profile', views.profile, name='profile'),
     path('add-choice/', views.add_choice, name='add_choice'),

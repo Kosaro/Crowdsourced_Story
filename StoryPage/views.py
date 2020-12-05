@@ -178,10 +178,13 @@ def login_request(request):
         else:
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
-    return render(request = request,
-        template_name="/login.html",
-        context={"form":form})
+    #return render(request = request,
+        #template_name="1/",
+        #context={"form":form})
+    return redirect(plot_point, 1)
 
+def sign_up(request):
+    return render(request, 'signUp.html')
 
 def register(request):
     if request.method == "POST":
@@ -196,11 +199,13 @@ def register(request):
             for msg in form.error_messages:
                 print(form.error_messages[msg])
 
-            return render(request = request,
-                          template_name = "/register.html",
-                          context={"form":form})
+            #return render(request = request,
+                         #template_name = "1/",
+                          #context={"form":form})
+            return redirect(plot_point,1)
 
     form = UserCreationForm
-    return render(request = request,
-                  template_name = "/register.html",
-                  context={"form":form})
+    return redirect(plot_point, 1)
+    #return render(request = request,
+                  #template_name = "signUp.html",
+                  #context={"form":form})

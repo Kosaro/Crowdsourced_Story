@@ -6,11 +6,21 @@
     $(document).ready(function() {
         $(".vote_icon_down").click(function () {
             $(this).toggleClass("pressed");
-            $(this).parent().find(".vote_icon_up").removeClass("pressed");
+            //$(this).parent().find(".vote_icon_up").removeClass("pressed");
+            if($(".vote_icon_down").parent().find(".vote_icon_up").hasClass("pressed")) {
+                $("#toggle_upvote").submit()
+            }
+            $("#toggle_downvote").submit()
+            $(".vote_icon_up").removeClass("pressed");
         });
         $(".vote_icon_up").click(function () {
             $(this).toggleClass("pressed");
-            $(this).parent().find(".vote_icon_down").removeClass("pressed");
+            //$(".vote_icon_up").parent().find(".vote_icon_down").removeClass("pressed");
+            if($(".vote_icon_up").parent().find(".vote_icon_down").hasClass("pressed")) {
+                $("#toggle_downvote").submit()
+            }
+            $("#toggle_upvote").submit()
+            $(".vote_icon_down").removeClass("pressed");
         });
         $("#add_choice_button").click(function (){
             $(this).hide();
@@ -28,24 +38,22 @@
             window.history.back();
         });
         $(function() {
-            $("#toggle_bookmark").submit(function(event) {
+            $(".toggle").submit(function(event) {
                 // Stop form from submitting normally
                 event.preventDefault();
                 var friendForm = $(this);
                 // Send the data using post
                 var posting = $.post( friendForm.attr('action'), friendForm.serialize() );
-                // if success:
-                posting.done(function(data) {
-                    // success actions, maybe change submit button to 'friend added' or whatever
-                });
-                // if failure:
-                posting.fail(function(data) {
-                    // 4xx or 5xx response, alert user about failure
-                });
             });
         });
         if({{ bookmarked }}==1){
             $(".favorite").addClass("pressed");
+        }
+        if({{ upvoted }}==1){
+            $(".vote_icon_up").addClass("pressed");
+        }
+        if({{ downvoted }}==1){
+            $(".vote_icon_down").addClass("pressed");
         }
 });
 </script>
@@ -74,9 +82,19 @@
     <div class="plot-point">{{plot_point}}</div>
 <div class="votes_wrapper">
     <div class="votes">
-        <img class="plot_vote vote_icon_up" src="{% static 'icons/triangle.svg' %}" />
+        <form class= "toggle" action="/toggle_upvote/" method="post">
+            {% csrf_token %}
+        <img id="toggle_upvote" class="plot_vote vote_icon_up" src="{% static 'icons/triangle.svg' %}" />
+            <input type="hidden" name="plot_point_id" value="{{ plot_point_id }}">
+            <input type="hidden" name="user" value="{{ username }}">
+        </form>
+        <form id="toggle_downvote" class= "toggle" action="/toggle_downvote/" method="post">
+            {% csrf_token %}
         <img class="plot_vote vote_icon_down" src="{% static 'icons/triangle.svg' %}" />
-        <form id= "toggle_bookmark" action="/toggle_bookmark/" method="post">
+            <input type="hidden" name="plot_point_id" value="{{ plot_point_id }}">
+            <input type="hidden" name="user" value="{{ username }}">
+        </form>
+        <form id="toggle_bookmark" class= "toggle" action="/toggle_bookmark/" method="post">
             {% csrf_token %}
             <img class="favorite" src="{% static 'icons/star.svg' %}" />
             <input type="hidden" name="plot_point_id" value="{{ plot_point_id }}">
@@ -99,7 +117,7 @@
         {% csrf_token %}
         <input type="hidden" name="destination_id" value="{{ choice.destination_id }}">
         <div class="btn btn-animation"onclick="javascript:this.parentNode.submit();">
-            <div class="votes">
+            <div class="votes" style="display: none">
                 <img class="choice_vote vote_icon_up" src="{% static 'icons/menu-up.svg' %}" />
                 <img class="choice_vote vote_icon_down " src="{% static 'icons/menu-up.svg' %}" />
             </div>

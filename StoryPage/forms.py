@@ -13,4 +13,12 @@ class ToggleBookmarkForm(forms.Form):
     plot_point_id = forms.IntegerField(label='plot_point_id')
     user = forms.CharField(label='user', max_length=20)
 
+class ToggleUpvoteForm(forms.Form):
+    plot_point_id = forms.IntegerField(label='plot_point_id')
+    user = forms.CharField(label='user', max_length=20)
+
+class ToggleDownvoteForm(forms.Form):
+    plot_point_id = forms.IntegerField(label='plot_point_id')
+    user = forms.CharField(label='user', max_length=20)
+
 

@@ -10,4 +10,7 @@ urlpatterns = [
     path('toggle_bookmark/', views.toggle_bookmark, name='toggle_bookmark'),
     path('toggle_upvote/', views.toggle_upvote, name='toggle_upvote'),
     path('toggle_downvote/', views.toggle_downvote, name='toggle_downvote'),
+    path("logout", views.logout_request, name="logout"),
+    path("login", views.login_request, name="login"),
+    path("register", views.register, name="register"),
 ]

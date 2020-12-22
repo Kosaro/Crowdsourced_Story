@@ -6,11 +6,21 @@
     $(document).ready(function() {
         $(".vote_icon_down").click(function () {
             $(this).toggleClass("pressed");
-            $(this).parent().find(".vote_icon_up").removeClass("pressed");
+            //$(this).parent().find(".vote_icon_up").removeClass("pressed");
+            if($(".vote_icon_down").parent().find(".vote_icon_up").hasClass("pressed")) {
+                $("#toggle_upvote").submit()
+            }
+            $("#toggle_downvote").submit()
+            $(".vote_icon_up").removeClass("pressed");
         });
         $(".vote_icon_up").click(function () {
             $(this).toggleClass("pressed");
-            $(this).parent().find(".vote_icon_down").removeClass("pressed");
+            //$(".vote_icon_up").parent().find(".vote_icon_down").removeClass("pressed");
+            if($(".vote_icon_up").parent().find(".vote_icon_down").hasClass("pressed")) {
+                $("#toggle_downvote").submit()
+            }
+            $("#toggle_upvote").submit()
+            $(".vote_icon_down").removeClass("pressed");
         });
         $("#add_choice_button").click(function (){
             $(this).hide();
@@ -22,8 +32,34 @@
         });
         $(".favorite").click(function () {
             $(this).toggleClass("pressed");
+            $("#toggle_bookmark").submit()
         });
-
+        $(".back").click(function (){
+            window.history.back();
+        });
+        $(function() {
+            $(".toggle").submit(function(event) {
+                // Stop form from submitting normally
+                event.preventDefault();
+                var friendForm = $(this);
+                // Send the data using post
+                var posting = $.post( friendForm.attr('action'), friendForm.serialize() );
+            });
+        });
+        if({{ bookmarked }}==1){
+            $(".favorite").addClass("pressed");
+        }
+        if({{ upvoted }}==1){
+            $(".vote_icon_up").addClass("pressed");
+        }
+        if({{ downvoted }}==1){
+            $(".vote_icon_down").addClass("pressed");
+        }
+        if(!!window.performance && window.performance.navigation.type === 2)
+{
+    console.log('Reloading');
+    window.location.reload();
+}
 });
 </script>
 <head>
@@ -42,7 +78,7 @@
             <div class="dropdown-content">
                 <div class="dropdown-list">
                     <a href="{% url 'profile' %}">View profile</a>
-                    <span>Sign out</span>
+                    <a href="{% url 'logout' %}">Sign out</a>
                 </div>
             </div>
     </div>
@@ -51,9 +87,24 @@
     <div class="plot-point">{{plot_point}}</div>
 <div class="votes_wrapper">
     <div class="votes">
-        <img class="plot_vote vote_icon_up" src="{% static 'icons/triangle.svg' %}" />
+        <form class= "toggle" action="/toggle_upvote/" method="post">
+            {% csrf_token %}
+        <img id="toggle_upvote" class="plot_vote vote_icon_up" src="{% static 'icons/triangle.svg' %}" />
+            <input type="hidden" name="plot_point_id" value="{{ plot_point_id }}">
+            <input type="hidden" name="user" value="{{ username }}">
+        </form>
+        <form id="toggle_downvote" class= "toggle" action="/toggle_downvote/" method="post">
+            {% csrf_token %}
         <img class="plot_vote vote_icon_down" src="{% static 'icons/triangle.svg' %}" />
-        <img class="favorite" src="{% static 'icons/star.svg' %}" />
+            <input type="hidden" name="plot_point_id" value="{{ plot_point_id }}">
+            <input type="hidden" name="user" value="{{ username }}">
+        </form>
+        <form id="toggle_bookmark" class= "toggle" action="/toggle_bookmark/" method="post">
+            {% csrf_token %}
+            <img class="favorite" src="{% static 'icons/star.svg' %}" />
+            <input type="hidden" name="plot_point_id" value="{{ plot_point_id }}">
+            <input type="hidden" name="user" value="{{ username }}">
+        </form>
     </div>
      <div style="display: none" id="votes_with_tally" class="votes">
         <img class="plot_vote vote_icon_up" src="{% static 'icons/menu-up.svg' %}" />
@@ -67,22 +118,29 @@
 </div>
 <div class="choices">
     {% for choice in choices %}
-        <div class="btn btn-animation">
-            <div class="votes">
+        <form action="/open_plot_point/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="destination_id" value="{{ choice.destination_id }}">
+        <div class="btn btn-animation"onclick="javascript:this.parentNode.submit();">
+            <div class="votes" style="display: none">
                 <img class="choice_vote vote_icon_up" src="{% static 'icons/menu-up.svg' %}" />
                 <img class="choice_vote vote_icon_down " src="{% static 'icons/menu-up.svg' %}" />
             </div>
-            <span >{{ choice }}</span>
+            <span >{{ choice.text }}</span>
         </div>
+        </form>
     {% endfor %}
         <img id="add_choice_button" src="{% static 'icons/plus.svg' %}" />
   </div>
-<div id="add_choice">
+<form id="add_choice" action="/add-choice/" method="post" >
+    {% csrf_token %}
+    <input type="hidden" name="plot_point_id" value="{{ plot_point_id }}">
+    <input type="hidden" name="author" value="{{ username }}">
     <div class="text_box_label">Choice:</div>
-    <input class="text_box">
+    <input class="text_box" name="choice_text">
     <div id="plot_labal_container" class="text_box_label">
         <div>Next part of the story:</div>
-        <div class="switch_container" >
+        <div class="switch_container" style="visibility: hidden">
             New
             <label class="switch">
                 <input type="checkbox">
@@ -91,12 +149,12 @@
             Link
         </div>
     </div>
-    <textarea class="text_box story_text_box"></textarea>
+    <textarea class="text_box story_text_box" name="plot_point_text"></textarea>
     <div id="buttons">
         <button class="close_new_choice">Cancel</button>
         <button class="close_new_choice" >Submit</button>
     </div>
-</div>
+</form>
 </div>
 
 </body>

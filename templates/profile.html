@@ -47,7 +47,7 @@
         <span>{{ username }}</span>
         <div class="dropdown-content">
             <div class="dropdown-list">
-                <span>Sign out</span>
+                <a href="{% url 'logout' %}">Sign out</a>
             </div>
         </div>
     </div>
@@ -57,16 +57,16 @@
     <div id="options-menu">
         <div id="overview_option" class="option pressed">Overview</div>
         <div id="favorites_option" class="option">Favorites</div>
-        <div id="option_options" class="option">Options</div>
+        <div id="option_options" class="option"style="display: none">Options</div>
     </div>
     <div id="overview" class="main-column">
         <div id="summary-grid">
             <span id="contribution-header">Contributions</span>
             <span id="upvotes-received-header">Upvotes received</span>
             <span id="votes-cast-header">Votes cast</span>
-            <span id="contribution-number" class="summary-value">4</span>
-            <span id="upvotes-received-number" class="summary-value">3</span>
-            <span id="votes-cast-number" class="summary-value">12</span>
+            <span id="contribution-number" class="summary-value">{{ votes_cast }}</span>
+            <span id="upvotes-received-number" class="summary-value">{{ num_posts }}</span>
+            <span id="votes-cast-number" class="summary-value">{{ total_upvotes }}</span>
         </div>
         <div id="contribution-grid">
         <div class="bottom-border">
@@ -75,9 +75,9 @@
             <div class="bottom-border">
                 <span>Contribution</span>
             </div>
-            {% for post in posts %}
+            {% for post,score in posts %}
                 <div class="score-cell">
-                    <span>10</span>
+                    <span>{{ score }}</span>
                 </div>
                 <span class="contribution-cell">{{ post }}</span>
             {% endfor %}
@@ -91,13 +91,13 @@
             <div class="bottom-border">
                 <span>Favorite</span>
             </div>
-            {% for favorite in favorites %}
-                <div class="author-cell">123456789012</div>
+            {% for favorite, author in favorites %}
+                <div class="author-cell">{{ author }}</div>
                 <span class="contribution-cell">{{ favorite }}</span>
             {% endfor %}
     </div>
 </div>
-<div class="main-column" id="options" >
+<div class="main-column" id="options" style="display: none">
     Placeholder for options
 </div>
 </div>

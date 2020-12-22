@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="center">
-        <form id="login" action="/login/" method="post" >
+        <form id="login" method="post" >
             <div id="column">
                 {% csrf_token %}
                 <div id="title">Log in</div>
@@ -21,6 +21,7 @@
                 <input class="text_box box" name="user_name">
                 <span class="l">Password</span>
                 <input class="text_box box" name="password" type="password">
+                {{ form.as_p }}
                 <input value="Log in" type="submit" class="button">
             </div>
         </form>

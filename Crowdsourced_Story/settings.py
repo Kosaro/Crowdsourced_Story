@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
- #   'StoryPage'
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -132,3 +131,5 @@ PROJECT_DIR = os.path.dirname(__file__)
 STATICFILES_DIRS = (
     os.path.join(PROJECT_DIR, 'static'),
 )
+
+LOGIN_REDIRECT_URL = '/1/'

@@ -66,7 +66,7 @@ def profile(request):
     return render(request, 'profile.html', context)
 
 def log_in(request):
-    return render(request, 'login.html')
+    return render(request, 'registration/../templates/login.html')
 
 def sign_up(request):
     return render(request, 'signUp.html')
@@ -173,15 +173,16 @@ def login_request(request):
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}")
                 return redirect('/')
+                #return redirect(plot_point, 1)
             else:
                 messages.error(request, "Invalid username or password.")
         else:
             messages.error(request, "Invalid username or password.")
-    form = AuthenticationForm()
+    #form = AuthenticationForm()
     #return render(request = request,
         #template_name="1/",
         #context={"form":form})
-    return redirect(plot_point, 1)
+        return redirect(log_in)
 
 def sign_up(request):
     return render(request, 'signUp.html')

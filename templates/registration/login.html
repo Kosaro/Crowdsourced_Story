@@ -18,10 +18,9 @@
                 {% csrf_token %}
                 <div id="title">Log in</div>
                 <span class="l">User name</span>
-                <input class="text_box box" name="user_name">
+                <input class="text_box box" name="username">
                 <span class="l">Password</span>
                 <input class="text_box box" name="password" type="password">
-                {{ form.as_p }}
                 <input value="Log in" type="submit" class="button">
             </div>
         </form>

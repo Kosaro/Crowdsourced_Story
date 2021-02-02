@@ -5,7 +5,7 @@ from StoryPage.forms import *
 from StoryPage.models import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User as AuthUser
 
 
 # this is the same render function that was filled with dummy data, but you have to pass a PlotPoint object to it.
@@ -13,17 +13,17 @@ def plot_point(request, plot_point_id):
     plot = PlotPoint.objects.get(pk=plot_point_id)
     user = request.user
     try:
-        Bookmark.objects.get(user=user,plot_point=plot_point_id)
+        Bookmark.objects.get(user=user, plot_point=plot_point_id)
         bookmark = 1
     except:
         bookmark = 0
     try:
-        Upvotes.objects.get(user=user,plot_point=plot_point_id)
+        Upvote.objects.get(user=user, plot_point=plot_point_id)
         upvoted = 1
     except:
         upvoted = 0
     try:
-        Downvotes.objects.get(user=user,plot_point=plot_point_id)
+        Downvote.objects.get(user=user, plot_point=plot_point_id)
         downvoted = 1
     except:
         downvoted = 0
@@ -38,6 +38,7 @@ def plot_point(request, plot_point_id):
                'downvoted': downvoted}
     return render(request, 'plotPoint.html', context)
 
+
 def open_plot_point(request, form_class=OpenPlotPointForm):
     print(request.method)
     if request.method == 'POST':
@@ -47,14 +48,13 @@ def open_plot_point(request, form_class=OpenPlotPointForm):
             return redirect(plot_point, destination_id)
 
 
-
 def profile(request):
-    username=request.user
+    username = request.user
     posts = PlotPoint.objects.filter(writtenby=username).values('pptext', 'uv')
-    votes_cast = Upvotes.objects.filter(user=username).count()
+    votes_cast = Upvote.objects.filter(user=username).count()
     posts = [(f['pptext'], f['uv']) for f in posts]
     total_upvotes = 0
-    num_posts=0
+    num_posts = 0
     for _, votes in posts:
         total_upvotes += int(votes)
         num_posts += 1
@@ -62,11 +62,13 @@ def profile(request):
     favorites = [(f['plot_point__pptext'], f['plot_point__writtenby']) for f in favorites]
 
     context = {'posts': posts, 'username': username, 'favorites': favorites, 'votes_cast': votes_cast,
-               'total_upvotes':total_upvotes, 'num_posts': num_posts}
+               'total_upvotes': total_upvotes, 'num_posts': num_posts}
     return render(request, 'profile.html', context)
+
 
 def log_in(request):
     return render(request, 'registration/../templates/login.html')
+
 
 def sign_up(request):
     return render(request, 'signUp.html')
@@ -115,6 +117,7 @@ def toggle_bookmark(request, form_class=ToggleBookmarkForm):
             return HttpResponse('Toggled bookmark')
     return HttpResponse('Failed to toggle bookmark')
 
+
 def toggle_upvote(request, form_class=ToggleUpvoteForm):
     print(request.method)
     if request.method == 'POST':
@@ -127,13 +130,14 @@ def toggle_upvote(request, form_class=ToggleUpvoteForm):
             plot.save()
             current_user = request.user
             try:
-                vote = Upvotes.objects.get(user=current_user, plot_point=plot)
+                vote = Upvote.objects.get(user=current_user, plot_point=plot)
                 vote.delete()
-            except Upvotes.DoesNotExist:
-                newvote = Upvotes(user=current_user, plot_point=plot)
+            except Upvote.DoesNotExist:
+                newvote = Upvote(user=current_user, plot_point=plot)
                 newvote.save()
             return HttpResponse('Toggled bookmark')
     return HttpResponse('Failed to toggle bookmark')
+
 
 def toggle_downvote(request, form_class=ToggleDownvoteForm):
     print(request.method)
@@ -147,10 +151,10 @@ def toggle_downvote(request, form_class=ToggleDownvoteForm):
             plot.save()
             current_user = request.user
             try:
-                vote = Downvotes.objects.get(user=current_user, plot_point=plot)
+                vote = Downvote.objects.get(user=current_user, plot_point=plot)
                 vote.delete()
-            except Downvotes.DoesNotExist:
-                newvote = Downvotes(user=current_user, plot_point=plot)
+            except Downvote.DoesNotExist:
+                newvote = Downvote(user=current_user, plot_point=plot)
                 newvote.save()
             return HttpResponse('Toggled bookmark')
     return HttpResponse('Failed to toggle bookmark')
@@ -162,51 +166,64 @@ def logout_request(request):
     return redirect("/login")
 
 
-def login_request(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request=request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.info(request, f"You are now logged in as {username}")
-                return redirect('/')
-                #return redirect(plot_point, 1)
-            else:
-                messages.error(request, "Invalid username or password.")
-        else:
-            messages.error(request, "Invalid username or password.")
-    #form = AuthenticationForm()
-    #return render(request = request,
-        #template_name="1/",
-        #context={"form":form})
-        return redirect(log_in)
-
-def sign_up(request):
-    return render(request, 'signUp.html')
+# def login_request(request):
+# if request.method == 'POST':
+# form = AuthenticationForm(request=request, data=request.POST)
+# if form.is_valid():
+# username = form.cleaned_data.get('username')
+# password = form.cleaned_data.get('password')
+# user = authenticate(username=username, password=password)
+# if user is not None:
+# login(request, user)
+# messages.info(request, f"You are now logged in as {username}")
+# return redirect('/')
+# return redirect(plot_point, 1)
+# else:
+# messages.error(request, "Invalid username or password.")
+# else:
+# messages.error(request, "Invalid username or password.")
+# form = AuthenticationForm()
+# return render(request = request,
+# template_name="1/",
+# context={"form":form})
+# return redirect(log_in)
 
 def register(request):
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            username = form.cleaned_data.get('username')
-            login(request, user)
-            return redirect("main:homepage")
+    return render(request, 'signUp.html')
 
+
+def create_user(request, form_class=NewUserForm):
+    if request.method == "POST":
+        # form = UserCreationForm(request.POST)
+        form = form_class(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password1 = form.cleaned_data.get('password1')
+            password2 = form.cleaned_data.get('password2')
+            email = form.cleaned_data.get('email')
+            user = User.objects.create_user(username=username, password=password1, email=email)
+            user.save()
+            login(request, user)
+            return redirect("/1/")
         else:
             for msg in form.error_messages:
                 print(form.error_messages[msg])
-
-            #return render(request = request,
-                         #template_name = "1/",
-                          #context={"form":form})
-            return redirect(plot_point,1)
+                for key, error in form.error_messages.items():
+                    messages.error(request, error)
+            # return render(request = request,
+            # template_name = "1/",
+            # context={"form":form})
+            return redirect(register)
 
     form = UserCreationForm
-    return redirect(plot_point, 1)
-    #return render(request = request,
-                  #template_name = "signUp.html",
-                  #context={"form":form})
+    return redirect(sign_up)
+    # return render(request = request,
+    # template_name = "signUp.html",
+    # context={"form":form})
+
+
+def storySelection(request):
+    username = request.user
+    roots = RootPlotPoint.objects.all()
+    context = {"username": username, "roots": roots}
+    return render(request, 'StorySelector.html', context)

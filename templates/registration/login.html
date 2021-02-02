@@ -13,8 +13,8 @@
 </head>
 <body>
     <div class="center">
-        <form id="login" method="post" >
-            <div id="column">
+        <form method="post" class="centered-column" action="{%  url 'login' %}">
+            <div class="column">
                 {% csrf_token %}
                 <div id="title">Log in</div>
                 <span class="l">User name</span>
@@ -23,6 +23,12 @@
                 <input class="text_box box" name="password" type="password">
                 <input value="Log in" type="submit" class="button">
             </div>
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    <a class="close" href="#" data-dismiss="alert">×</a>
+                    {{ message }}
+                </div>
+            {% endfor %}
         </form>
     </div>
 </body>

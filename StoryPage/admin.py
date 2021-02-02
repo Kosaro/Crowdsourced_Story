@@ -18,27 +18,30 @@ class ChoiceAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
     list_display = ['user', 'plot_point']
 
-@admin.register(Edits)
+@admin.register(Edit)
 class UserAdmin(admin.ModelAdmin):
     list_display = ['user', 'request_status']
 
-@admin.register(Choice_Edits)
+@admin.register(Choice_Edit)
 class UserAdmin(admin.ModelAdmin):
     list_display = ['user', 'choice', 'request_status']
 
-@admin.register(Upvotes)
+@admin.register(Upvote)
 class UserAdmin(admin.ModelAdmin):
     list_display = ['user', 'plot_point']
 
-@admin.register(Downvotes)
+@admin.register(Downvote)
 class UserAdmin(admin.ModelAdmin):
     list_display = ['user', 'plot_point']
 
-@admin.register(Choice_Upvotes)
+@admin.register(Choice_Upvote)
 class UserAdmin(admin.ModelAdmin):
     list_display = ['user', 'plot_point', 'choice']
 
-@admin.register(Choice_Downvotes)
+@admin.register(Choice_Downvote)
 class UserAdmin(admin.ModelAdmin):
     list_display = ['user', 'plot_point', 'choice']
 
+@admin.register(RootPlotPoint)
+class RootPlotPoint(admin.ModelAdmin):
+    list_display = [field.name for field in RootPlotPoint._meta.get_fields()]

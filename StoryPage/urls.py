@@ -3,7 +3,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    #path("", auth_views.LoginView.as_view(template_name='login.html'), name="default"),
+    path("", views.storySelection, name="default"),
     path('<int:plot_point_id>/', views.plot_point, name='plot_point'),
     path('profile', views.profile, name='profile'),
     path('add-choice/', views.add_choice, name='add_choice'),
@@ -13,6 +13,8 @@ urlpatterns = [
     path('toggle_downvote/', views.toggle_downvote, name='toggle_downvote'),
     #path("logout/", views.logout_request, name="logout"),
     #path("login/", auth_views.login, name="login"),
-    #path("signup/", views.register, name="register"),
+    path("accounts/register/", views.register, name="register"),
+    path("create_user/", views.create_user, name="create_user"),
     path('accounts/', include('django.contrib.auth.urls')),
+    #path(r'accounts/login/', 'django.contrib.auth.views.login', name='login'),
 ]

@@ -12,6 +12,10 @@ class PlotPoint(models.Model):
     def __str__(self):
         return self.pptext
 
+class RootPlotPoint(models.Model):
+    plotpoint = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
+    story_name = models.CharField(max_length=20)
+
 
 class Choice(models.Model):
     plotpoint = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
@@ -30,36 +34,36 @@ class Bookmark(models.Model):
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
 
 
-class Edits(models.Model):
+class Edit(models.Model):
     user = models.CharField(max_length=30)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
     request_status = models.BooleanField(default=True)
 
 
-class Choice_Edits(models.Model):
+class Choice_Edit(models.Model):
     user = models.CharField(max_length=30)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
     request_status = models.BooleanField(default=True)
 
 
-class Upvotes(models.Model):
+class Upvote(models.Model):
     user = models.CharField(max_length=30)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
 
 
-class Downvotes(models.Model):
+class Downvote(models.Model):
     user = models.CharField(max_length=30)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
 
 
-class Choice_Upvotes(models.Model):
+class Choice_Upvote(models.Model):
     user = models.CharField(max_length=30)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
 
 
-class Choice_Downvotes(models.Model):
+class Choice_Downvote(models.Model):
     user = models.CharField(max_length=30)
     plot_point = models.ForeignKey(PlotPoint, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)

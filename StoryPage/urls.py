@@ -13,8 +13,8 @@ urlpatterns = [
     path('toggle_downvote/', views.toggle_downvote, name='toggle_downvote'),
     #path("logout/", views.logout_request, name="logout"),
     #path("login/", auth_views.login, name="login"),
-    path("accounts/register/", views.register, name="register"),
-    path("create_user/", views.create_user, name="create_user"),
+    path("login/", views.log_in, name="login"),
+    path("register/", views.register, name="register"),
     path('accounts/', include('django.contrib.auth.urls')),
     #path(r'accounts/login/', 'django.contrib.auth.views.login', name='login'),
 ]

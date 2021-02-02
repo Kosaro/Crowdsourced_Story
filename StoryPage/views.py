@@ -5,7 +5,6 @@ from StoryPage.forms import *
 from StoryPage.models import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User as AuthUser
 
 
 # this is the same render function that was filled with dummy data, but you have to pass a PlotPoint object to it.
@@ -66,8 +65,25 @@ def profile(request):
     return render(request, 'profile.html', context)
 
 
-def log_in(request):
-    return render(request, 'registration/../templates/login.html')
+def log_in(request, form_class=LogInForm):
+    if request.method == "POST":
+        # form = UserCreationForm(request.POST)
+        form = form_class(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            login(request, user)
+            return redirect("/1/")
+        else:
+            for msg in form.error_messages:
+                print(form.error_messages[msg])
+                for key, error in form.error_messages.items():
+                    messages.error(request, error)
+    else:
+        form = LogInForm()
+    context = {"form": form}
+    return render(request, 'registration/login.html', context)
 
 
 def sign_up(request):
@@ -188,11 +204,8 @@ def logout_request(request):
 # context={"form":form})
 # return redirect(log_in)
 
-def register(request):
-    return render(request, 'signUp.html')
 
-
-def create_user(request, form_class=NewUserForm):
+def register(request, form_class=User):
     if request.method == "POST":
         # form = UserCreationForm(request.POST)
         form = form_class(request.POST)
@@ -212,11 +225,11 @@ def create_user(request, form_class=NewUserForm):
                     messages.error(request, error)
             # return render(request = request,
             # template_name = "1/",
-            # context={"form":form})
-            return redirect(register)
+    else:
+        form = UserCreationForm
+    context = {"form": form}
+    return render(request, 'signUp.html', context)
 
-    form = UserCreationForm
-    return redirect(sign_up)
     # return render(request = request,
     # template_name = "signUp.html",
     # context={"form":form})

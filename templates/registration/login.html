@@ -22,13 +22,8 @@
                 <span class="l">Password</span>
                 <input class="text_box box" name="password" type="password">
                 <input value="Log in" type="submit" class="button">
+                <div>{{ form.errors }}</div>
             </div>
-            {% for message in messages %}
-                <div class="alert alert-success">
-                    <a class="close" href="#" data-dismiss="alert">×</a>
-                    {{ message }}
-                </div>
-            {% endfor %}
         </form>
     </div>
 </body>

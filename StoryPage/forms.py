@@ -24,27 +24,18 @@ class ToggleDownvoteForm(forms.Form):
     plot_point_id = forms.IntegerField(label='plot_point_id')
     user = forms.CharField(label='user', max_length=20)
 
-#class LogInForm(forms.Form):
-    #user = forms.CharField(label='user_name', max_length=20)
-    #password = forms.CharField(label='password', max_length=20)
+class LogInForm(forms.Form):
+    user = forms.CharField(label='user_name', max_length=20)
+    password = forms.CharField(label='password', max_length=20)
 
-class SignupForm(forms.Form):
-    user = forms.CharField(label='username', max_length=20)
-    email = forms.CharField(label='email', max_length=20)
-    password = forms.CharField(label='password1', max_length=20)
-    confirm_password = forms.CharField(label='password2', max_length=20)
+#class SignupForm(forms.Form):
+    #user = forms.CharField(label='username', max_length=20)
+    #email = forms.CharField(label='email', max_length=20)
+    #password = forms.CharField(label='password1', max_length=20)
+    #confirm_password = forms.CharField(label='password2', max_length=20)
 
-
-class NewUserForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-
+class SignupForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2")
+        fields = "__all__"
 
-    def save(self, commit=True):
-        user = super(NewUserForm, self).save(commit=False)
-        user.email = self.cleaned_data["email"]
-        if commit:
-            user.save()
-        return user

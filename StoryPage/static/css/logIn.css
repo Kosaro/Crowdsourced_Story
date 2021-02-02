@@ -1,13 +1,12 @@
 .center{
   margin: auto;
-  width: 700px;
+  width: 100px;
   display: flex;
-  justify-content: center;
 }
 html {
   background: #333;
   font-family: "Open Sans";
-  font-size: 140%;
+  font-size: 100%;
   color: white;
 }
 
@@ -35,8 +34,6 @@ button{
   margin-top: 5rem;
   display: flex;
   flex-direction: column;
-  align-content: center;
-  justify-content: flex-start;
   width: fit-content;
 }
 #title{
@@ -48,6 +45,17 @@ button{
 .centered-column{
   display: flex;
   flex-direction: column;
-  align-content: center;
-  align-items: center;
+  align-content: flex-start;
+  align-items:center;
+}
+
+.helptext{
+  font-size: .75rem;
+}
+th{
+  vertical-align: top;
+  text-align: right;
+}
+td{
+  max-width: 20rem;
 }

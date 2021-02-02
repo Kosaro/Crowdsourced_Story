@@ -13,15 +13,16 @@
 </head>
 <body>
     <div class="center">
-        <form id="login" action="/login/" method="post" >
-            <div id="column">
+        <form method="post" class="centered-column" action="{%  url 'login' %}">
+            <div class="column">
                 {% csrf_token %}
                 <div id="title">Log in</div>
                 <span class="l">User name</span>
-                <input class="text_box box" name="user_name">
+                <input class="text_box box" name="username">
                 <span class="l">Password</span>
                 <input class="text_box box" name="password" type="password">
                 <input value="Log in" type="submit" class="button">
+                <div>{{ form.errors }}</div>
             </div>
         </form>
     </div>

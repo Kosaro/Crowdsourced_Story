@@ -18,6 +18,7 @@ a{
     text-decoration: inherit;
     color: inherit;
 }
+
 .dropdown-content {
     top: .9rem;
     display: none;
@@ -91,15 +92,6 @@ a{
     align-content: center;
 }
 
-#summary-grid{
-    display: grid;
-    grid-row-gap: 0;
-    justify-items: center;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas:
-        "header1 header2 header3"
-        "value1 value2 value3";
-}
 
 #contribution-header{
     grid-area: header2;
@@ -115,9 +107,6 @@ a{
 }
 #contribution-number{
     grid-area: value2;
-}
-#upvotes-received-number{
-    grid-area: value3;
 }
 
 .summary-value{

@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
- #   'StoryPage'
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -84,7 +83,7 @@ WSGI_APPLICATION = 'Crowdsourced_Story.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -125,6 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, "StoryPage/static")
 STATIC_URL = '/static/'
 
 PROJECT_DIR = os.path.dirname(__file__)
@@ -132,3 +132,5 @@ PROJECT_DIR = os.path.dirname(__file__)
 STATICFILES_DIRS = (
     os.path.join(PROJECT_DIR, 'static'),
 )
+
+LOGIN_REDIRECT_URL = '/1/'

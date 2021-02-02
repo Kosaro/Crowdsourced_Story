@@ -12,21 +12,20 @@
     </style>
 </head>
 <body>
-    <div class="center">
-        <form id="login" action="/signup/" method="post" >
-            <div id="column">
+    <div class="center column">
+        <form id="login" action="/register/" method="post" class="centered-column">
                 {% csrf_token %}
-                <div id="title">Create Account</div>
-                <span class="l">User name</span>
-                <input class="text_box box" name="user_name">
-                <span class="l">Email</span>
-                <input class="text_box box" name="email" type="email">
-                <span class="l">Password</span>
-                <input class="text_box box" name="password", type="password">
-                <span class="l">Confirm password</span>
-                <input class="text_box box" name="confirm_password", type="password">
-                <input value="Create" type="submit" class="button">
-            </div>
+        <h1>Create Account</h1>
+                <table>
+                    {{ form.as_table }}
+                    </table>
+                <div><input value="Create" type="submit" class="button"></div>
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    <a class="close" href="#" data-dismiss="alert">×</a>
+                    {{ message }}
+                </div>
+            {% endfor %}
         </form>
     </div>
 </body>

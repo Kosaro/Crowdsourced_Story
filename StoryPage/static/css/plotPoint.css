@@ -10,7 +10,8 @@ html {
 }
 
 a{
-  color: white;
+  text-decoration: inherit;
+  color: inherit;
 }
 
 button{

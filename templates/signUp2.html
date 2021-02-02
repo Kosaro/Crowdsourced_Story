@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<script src="{% static 'jquery-3.5.1.min.js' %}"></script>
+<script type='text/javascript'>
+</script>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/logIn.css' %}" />
+    <style>
+    </style>
+</head>
+<body>
+    <div class="center">
+        <form id="login" action="/create_user/" method="post" class="centered-column">
+            <div class="column">
+                {% csrf_token %}
+                <div id="title">Create Account</div>
+                <span class="l">User name</span>
+                <input class="text_box box" name="username">
+                <span class="l">Email</span>
+                <input class="text_box box" name="email" type="email">
+                <span class="l">Password</span>
+                <input class="text_box box" name="password1", type="password">
+                <span class="l">Confirm password</span>
+                <input class="text_box box" name="password2", type="password">
+                <input value="Create" type="submit" class="button">
+            </div>
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    <a class="close" href="#" data-dismiss="alert">×</a>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </form>
+    </div>
+</body>
+</html>

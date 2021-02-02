@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Story Selection</title>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
+</head>
+<body>
+<div class="center header">
+    <div class="header-left"><img class="back" src="{% static 'icons/arrow-left.svg' %}" /></div>
+    <div class="title">Crowdsourced Story</div>
+    <div class="header-right dropdown" style="width: fit-content">
+        <span>{{ username }}</span>
+        <div class="dropdown-content">
+            <div class="dropdown-list">
+                <a href="{% url 'logout' %}">Sign out</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="center">
+    <div id="contribution-grid">
+        <div class="bottom-border">
+            <span class="contribution-score-header">Author</span>
+        </div>
+        <div class="bottom-border">
+            <span>Favorite</span>
+        </div>
+        {% for root in roots %}
+            <div class="author-cell">{{ root.plotpoint_id }}</div>
+            <a href="/{{root.plotpoint_id }}" class="contribution-cell">{{ root.story_name }}</a>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
